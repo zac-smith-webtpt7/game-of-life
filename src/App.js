@@ -1,13 +1,13 @@
 import React from 'react'
-import './App.css'
-import Header from './components/Header'
-import Dashboard from './components/Dashboard'
+import styles from './App.module.css'
+import Header from './components/Header/Header'
+import Dashboard from './components/Dashboard/Dashboard'
 
 const App = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className={styles.container}>
         <Dashboard />
       </div>
     </>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './gameBoard.css'
+import styles from './GameControls.module.css'
 
 const GameControls = () => {
   return (

@@ -1,15 +1,15 @@
-nav {
+.nav {
   background: #efefef;
   margin: 0;
   display: flex;
   justify-content: space-between;
 }
 
-h1 {
+.logo {
   padding-left: 20px;
   margin: 8px 0;
 }
-ul {
+.nav_ul {
   list-style: none;
   display: flex;
   width: 20%;
@@ -17,6 +17,6 @@ ul {
   align-items: center;
 }
 
-li {
+.nav_li {
   font-size: 1.4rem;
 }

@@ -1,0 +1,10 @@
+.rules_container {
+  width: 28%;
+  /* background-color: green; */
+  padding: 15px 15px 15px 20px;
+  line-height: 1.8rem;
+}
+
+.li {
+  font-size: 1.4rem;
+}
