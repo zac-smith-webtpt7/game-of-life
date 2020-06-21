@@ -2,9 +2,18 @@
   width: 28%;
   /* background-color: green; */
   padding: 15px 15px 15px 20px;
-  line-height: 1.8rem;
+  line-height: 1.9rem;
+}
+
+.ol {
+  padding-left: 20px;
 }
 
 .li {
   font-size: 1.4rem;
+}
+
+.p {
+  font: 1.4rem;
+  padding: 15px 0;
 }
