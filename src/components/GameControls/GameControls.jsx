@@ -3,12 +3,14 @@ import styles from './GameControls.module.css'
 
 const GameControls = () => {
   return (
-    <section>
-      <button>Button</button>
-      <button>Button</button>
-      <button>Button</button>
-      <button>Button</button>
-      <button>Button</button>
+    <section className={styles.section}>
+      <button className={styles.btn}>25x25 Manual</button>
+      <button className={styles.btn}>25x25 Random</button>
+      <button className={styles.btn}>50x50 Manual</button>
+      <button className={styles.btn}>50x50 Random</button>
+      <button className={styles.btn}>Start</button>
+      <button className={styles.btn}>Pause</button>
+      <button className={styles.btn}>Reset</button>
     </section>
   )
 }
