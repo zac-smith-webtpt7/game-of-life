@@ -1,4 +1,7 @@
 .game_board {
   width: 70%;
   border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
