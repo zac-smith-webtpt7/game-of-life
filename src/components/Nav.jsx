@@ -1,9 +1,15 @@
 import React from 'react'
+import './nav.css'
 const Nav = () => {
   return (
-    <div>
-      <h2>Nav</h2>
-    </div>
+    <nav>
+      <h1>Game of Life</h1>
+      <ul>
+        <li>High Score</li>
+        <li>Rules</li>
+        <li>Learn</li>
+      </ul>
+    </nav>
   )
 }
 export default Nav
