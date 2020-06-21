@@ -5,11 +5,12 @@ import Dashboard from './components/Dashboard'
 
 const App = () => {
   return (
-    <div className="container">
-      <h3>Conway Game of Life</h3>
+    <>
       <Header />
-      <Dashboard />
-    </div>
+      <div className="container">
+        <Dashboard />
+      </div>
+    </>
   )
 }
 
