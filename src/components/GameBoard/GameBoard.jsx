@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import GameControls from '../GameControls/GameControls'
 import styles from './GameBoard.module.css'
 import produce from 'immer'
@@ -6,6 +6,21 @@ import produce from 'immer'
 const GameBoard = () => {
   const boxSize = 12
   const [gridSize, setGridSize] = useState(50)
+  const [gameTime, setGameTime] = useState(1000)
+  const [start, setStart] = useState(false)
+  const neigbors = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+    [1, 1],
+    [-1, -1],
+    [-1, 1],
+    [1, -1],
+  ]
+
+  let startReference = useRef(start)
+  startReference.current = start
 
   const [gameGrid, setGameGrid] = useState(() => {
     const rows = []
@@ -15,6 +30,39 @@ const GameBoard = () => {
 
     return rows
   })
+
+  const startGame = useCallback(() => {
+    if (!startReference) {
+      return
+    }
+
+    // game logic
+    setGameGrid((g) => {
+      return produce(g, (gridCopy) => {
+        for (let i = 0; i < gridSize; i++) {
+          for (let j = 0; j < gridSize; j++) {
+            let nGrid = 0
+            neigbors.forEach(([x, y]) => {
+              const IX = i + x
+              const JY = j + y
+              if (IX >= 0 && IX < gridSize && JY >= 0 && JY < gridSize) {
+                nGrid += g[IX][JY]
+              }
+            })
+
+            if (nGrid < 2 || nGrid > 3) {
+              gridCopy[i][j] = 0
+            }
+            if (g[i][j] === 0 && nGrid === 3) {
+              gridCopy[i][j] = 1
+            }
+          }
+        }
+      })
+    })
+
+    setTimeout(startGame, gameTime)
+  }, [])
 
   return (
     <div className={styles.game_board}>
@@ -26,19 +74,19 @@ const GameBoard = () => {
         }}
       >
         {gameGrid.map((rows, i) =>
-          rows.map((col, k) => (
+          rows.map((col, j) => (
             <div
-              key={`${i}+${k}`}
+              key={`${i}+${j}`}
               onClick={() => {
                 const newGrid = produce(gameGrid, (gridCopy) => {
-                  gridCopy[i][k] = gameGrid[i][k] ? 0 : 1
+                  gridCopy[i][j] = gameGrid[i][j] ? 0 : 1
                 })
                 setGameGrid(newGrid)
               }}
               style={{
                 width: boxSize,
                 height: boxSize,
-                background: gameGrid[i][k] ? 'blue' : 'black',
+                background: gameGrid[i][j] ? 'blue' : 'black',
                 border: '1px solid #222222',
               }}
             />
@@ -49,8 +97,21 @@ const GameBoard = () => {
         <section className={styles.section}>
           <button className={styles.btn}>50x50 Manual</button>
           <button className={styles.btn}>50x50 Random</button>
-          <button className={styles.btn}>Start</button>
-          <button className={styles.btn}>Pause</button>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              setStart(!start)
+              if (!start) {
+                startReference = true
+                startGame()
+              } else {
+                startReference = false
+              }
+            }}
+          >
+            {start ? 'Pause' : 'Start'}
+          </button>
+          {/* <button className={styles.btn}>Pause</button> */}
           <button className={styles.btn}>Reset</button>
         </section>
       </div>
