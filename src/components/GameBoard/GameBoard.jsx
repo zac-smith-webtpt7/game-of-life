@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 import GameControls from '../GameControls/GameControls'
 import styles from './GameBoard.module.css'
 
-const GameBoard = (props) => {
-  const [nRows, setnRows] = useState(50)
-  const [nCols, setnCols] = useState(50)
+const GameBoard = () => {
+  // const [nRows, setNRows] = useState(50)
+  // const [nCols, setNCols] = useState(50)
+
+  const [grid, setGrid] = useState(50) // console.log('rows', grid.nRows)
+  // console.log(('cols', grid.nCols))
 
   const [gameGrid, setGameGrid] = useState(() => {
     const rows = []
-    for (let i = 0; i < nRows; i++) {
-      rows.push(Array.from(Array(nCols), () => 0))
+    for (let i = 0; i < grid; i++) {
+      rows.push(Array.from(Array(grid), () => 0))
     }
 
     return rows
@@ -21,7 +24,7 @@ const GameBoard = (props) => {
         className={styles.game}
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${nCols}, 10px)`,
+          gridTemplateColumns: `repeat(${grid}, 10px)`,
         }}
       >
         {gameGrid.map((rows, i) =>
@@ -38,7 +41,15 @@ const GameBoard = (props) => {
           ))
         )}
       </div>
-      <GameControls />
+      <div>
+        <section className={styles.section}>
+          <button className={styles.btn}>50x50 Manual</button>
+          <button className={styles.btn}>50x50 Random</button>
+          <button className={styles.btn}>Start</button>
+          <button className={styles.btn}>Pause</button>
+          <button className={styles.btn}>Reset</button>
+        </section>
+      </div>
     </div>
   )
 }
