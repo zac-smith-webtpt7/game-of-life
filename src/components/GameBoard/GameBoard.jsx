@@ -1,36 +1,39 @@
 import React, { useState } from 'react'
 import GameControls from '../GameControls/GameControls'
 import styles from './GameBoard.module.css'
+import produce from 'immer'
 
 const GameBoard = () => {
-  // const [nRows, setNRows] = useState(50)
-  // const [nCols, setNCols] = useState(50)
-
-  const [grid, setGrid] = useState(50) // console.log('rows', grid.nRows)
-  // console.log(('cols', grid.nCols))
+  const [gridSize, setGridSize] = useState(50)
 
   const [gameGrid, setGameGrid] = useState(() => {
     const rows = []
-    for (let i = 0; i < grid; i++) {
-      rows.push(Array.from(Array(grid), () => 0))
+    for (let i = 0; i < gridSize; i++) {
+      rows.push(Array.from(Array(gridSize), () => 0))
     }
 
     return rows
   })
-  // console.log('rows', rows)
+
   return (
     <div className={styles.game_board}>
       <div
         className={styles.game}
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${grid}, 10px)`,
+          gridTemplateColumns: `repeat(${gridSize}, 10px)`,
         }}
       >
         {gameGrid.map((rows, i) =>
           rows.map((col, k) => (
             <div
               key={`${i}+${k}`}
+              onClick={() => {
+                const newGrid = produce(gameGrid, (gridCopy) => {
+                  gridCopy[i][k] = 1
+                })
+                setGameGrid(newGrid)
+              }}
               style={{
                 width: 10,
                 height: 10,
