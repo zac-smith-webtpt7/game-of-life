@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GameBoard from '../GameBoard/GameBoard'
 import Rules from '../Rules/Rules'
 import GameControls from '../GameControls/GameControls'
@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboard}>
       <GameBoard />
-      <GameControls />
+
       <Rules />
     </div>
   )

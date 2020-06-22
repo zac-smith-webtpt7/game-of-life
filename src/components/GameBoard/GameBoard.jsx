@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import GameControls from '../GameControls/GameControls'
 import styles from './GameBoard.module.css'
 
-const nRows = 50
-const nCols = 50
+const GameBoard = (props) => {
+  const [nRows, setnRows] = useState(50)
+  const [nCols, setnCols] = useState(50)
 
-const GameBoard = () => {
   const [gameGrid, setGameGrid] = useState(() => {
     const rows = []
     for (let i = 0; i < nRows; i++) {
@@ -37,6 +38,7 @@ const GameBoard = () => {
           ))
         )}
       </div>
+      <GameControls />
     </div>
   )
 }
