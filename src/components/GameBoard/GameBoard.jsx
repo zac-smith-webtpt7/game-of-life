@@ -4,6 +4,7 @@ import styles from './GameBoard.module.css'
 import produce from 'immer'
 
 const GameBoard = () => {
+  const boxSize = 12
   const [gridSize, setGridSize] = useState(50)
 
   const [gameGrid, setGameGrid] = useState(() => {
@@ -21,7 +22,7 @@ const GameBoard = () => {
         className={styles.game}
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${gridSize}, 10px)`,
+          gridTemplateColumns: `repeat(${gridSize}, ${boxSize}px)`,
         }}
       >
         {gameGrid.map((rows, i) =>
@@ -30,15 +31,15 @@ const GameBoard = () => {
               key={`${i}+${k}`}
               onClick={() => {
                 const newGrid = produce(gameGrid, (gridCopy) => {
-                  gridCopy[i][k] = 1
+                  gridCopy[i][k] = gameGrid[i][k] ? 0 : 1
                 })
                 setGameGrid(newGrid)
               }}
               style={{
-                width: 10,
-                height: 10,
-                background: gameGrid[i][k] ? 'pink' : undefined,
-                border: '1px solid black',
+                width: boxSize,
+                height: boxSize,
+                background: gameGrid[i][k] ? 'blue' : 'black',
+                border: '1px solid #222222',
               }}
             />
           ))
