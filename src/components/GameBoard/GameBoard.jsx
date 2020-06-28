@@ -126,6 +126,7 @@ const GameBoard = () => {
           <button
             onClick={() => {
               setGameGrid(emptyGrid())
+              setGameTime(1000)
             }}
             className={styles.btn}
           >
@@ -139,6 +140,19 @@ const GameBoard = () => {
           >
             Random
           </button>
+          <button
+            onClick={() => {
+              setGameTime(100)
+            }}
+            className={styles.btn}
+          >
+            Time 100ms
+          </button>
+          <div className={styles.details}>
+            <h3>Game Details</h3>
+            <p>Interval: {gameTime}</p>
+            <p>Grid Size: {`${gridSize}x${gridSize}`}</p>
+          </div>
         </section>
       </div>
     </div>

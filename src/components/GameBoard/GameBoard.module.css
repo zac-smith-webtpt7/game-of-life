@@ -7,7 +7,7 @@
 }
 
 .section {
-  width: 12%;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,4 +18,11 @@
   width: 120px;
   height: 25px;
   font-size: 1.4rem;
+}
+
+.details {
+  margin-top: 40px;
+  padding: 5px;
+  background: #ccc;
+  line-height: 2rem;
 }
