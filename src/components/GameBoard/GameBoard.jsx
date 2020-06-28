@@ -4,8 +4,8 @@ import styles from './GameBoard.module.css'
 import produce from 'immer'
 
 const GameBoard = () => {
-  const boxSize = 12
-  const [gridSize, setGridSize] = useState(50)
+  const boxSize = 18
+  const [gridSize, setGridSize] = useState(30)
   const [gameTime, setGameTime] = useState(1000)
   const [start, setStart] = useState(false)
   const neigbors = [
@@ -21,14 +21,17 @@ const GameBoard = () => {
 
   let startReference = useRef(start)
   startReference.current = start
-
-  const [gameGrid, setGameGrid] = useState(() => {
+  const emptyGrid = () => {
     const rows = []
     for (let i = 0; i < gridSize; i++) {
       rows.push(Array.from(Array(gridSize), () => 0))
     }
 
     return rows
+  }
+
+  const [gameGrid, setGameGrid] = useState(() => {
+    return emptyGrid()
   })
 
   const startGame = useCallback(() => {
@@ -112,7 +115,14 @@ const GameBoard = () => {
             {start ? 'Pause' : 'Start'}
           </button>
           {/* <button className={styles.btn}>Pause</button> */}
-          <button className={styles.btn}>Reset</button>
+          <button
+            onClick={() => {
+              setGameGrid(emptyGrid())
+            }}
+            className={styles.btn}
+          >
+            Reset
+          </button>
         </section>
       </div>
     </div>
