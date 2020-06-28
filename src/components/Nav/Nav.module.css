@@ -21,3 +21,21 @@
 .nav_li {
   font-size: 1.4rem;
 }
+
+a:link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: purple;
+}
+
+a:active {
+  color: purple;
+}
