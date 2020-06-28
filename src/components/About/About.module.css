@@ -3,6 +3,10 @@ section {
   line-height: 2rem;
 }
 
-p {
+.top {
   margin-top: 20px;
+}
+
+.pTag {
+  margin-top: 12px;
 }
