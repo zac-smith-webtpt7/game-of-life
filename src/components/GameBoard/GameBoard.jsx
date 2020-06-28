@@ -148,6 +148,22 @@ const GameBoard = () => {
           >
             Time 100ms
           </button>
+          <button
+            onClick={() => {
+              setGameTime(500)
+            }}
+            className={styles.btn}
+          >
+            Time 500ms
+          </button>
+          <button
+            onClick={() => {
+              setGameTime(1000)
+            }}
+            className={styles.btn}
+          >
+            Time 1000ms
+          </button>
           <div className={styles.details}>
             <h3>Game Details</h3>
             <p>Interval: {gameTime}</p>
