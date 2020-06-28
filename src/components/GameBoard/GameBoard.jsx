@@ -29,6 +29,16 @@ const GameBoard = () => {
 
     return rows
   }
+  const randomGrid = () => {
+    const rows = []
+    for (let i = 0; i < gridSize; i++) {
+      rows.push(
+        Array.from(Array(gridSize), () => (Math.random() > 0.75 ? 1 : 0))
+      )
+    }
+
+    return rows
+  }
 
   const [gameGrid, setGameGrid] = useState(() => {
     return emptyGrid()
@@ -98,8 +108,6 @@ const GameBoard = () => {
       </div>
       <div>
         <section className={styles.section}>
-          {/* <button className={styles.btn}>50x50 Manual</button> */}
-          {/* <button className={styles.btn}>50x50 Random</button> */}
           <button
             className={styles.btn}
             onClick={() => {
@@ -114,7 +122,7 @@ const GameBoard = () => {
           >
             {start ? 'Pause' : 'Start'}
           </button>
-          {/* <button className={styles.btn}>Pause</button> */}
+
           <button
             onClick={() => {
               setGameGrid(emptyGrid())
@@ -122,6 +130,14 @@ const GameBoard = () => {
             className={styles.btn}
           >
             Reset
+          </button>
+          <button
+            onClick={() => {
+              setGameGrid(randomGrid())
+            }}
+            className={styles.btn}
+          >
+            Random
           </button>
         </section>
       </div>
