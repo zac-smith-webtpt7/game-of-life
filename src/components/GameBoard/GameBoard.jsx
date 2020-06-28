@@ -32,7 +32,7 @@ const GameBoard = () => {
   })
 
   const startGame = useCallback(() => {
-    if (!startReference) {
+    if (!startReference.current) {
       return
     }
 
@@ -95,17 +95,17 @@ const GameBoard = () => {
       </div>
       <div>
         <section className={styles.section}>
-          <button className={styles.btn}>50x50 Manual</button>
-          <button className={styles.btn}>50x50 Random</button>
+          {/* <button className={styles.btn}>50x50 Manual</button> */}
+          {/* <button className={styles.btn}>50x50 Random</button> */}
           <button
             className={styles.btn}
             onClick={() => {
               setStart(!start)
               if (!start) {
-                startReference = true
+                startReference.current = true
                 startGame()
               } else {
-                startReference = false
+                startReference.current = false
               }
             }}
           >
