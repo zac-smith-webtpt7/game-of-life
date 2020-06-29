@@ -8,6 +8,7 @@ const GameBoard = () => {
   const [gridSize, setGridSize] = useState(30)
   const [gameTime, setGameTime] = useState(1000)
   const [start, setStart] = useState(false)
+  const [generations, setGenerations] = useState(0)
   const neigbors = [
     [0, 1],
     [0, -1],
@@ -29,6 +30,7 @@ const GameBoard = () => {
 
     return rows
   }
+
   const randomGrid = () => {
     const rows = []
     for (let i = 0; i < gridSize; i++) {
@@ -44,6 +46,16 @@ const GameBoard = () => {
     return emptyGrid()
   })
 
+  let count = 0
+  const resetCount = (count) => {
+    count = 0
+  }
+
+  const handleGenerations = () => {
+    count++
+    setGenerations(count)
+  }
+
   const startGame = useCallback(() => {
     if (!startReference.current) {
       return
@@ -55,6 +67,7 @@ const GameBoard = () => {
         for (let i = 0; i < gridSize; i++) {
           for (let j = 0; j < gridSize; j++) {
             let nGrid = 0
+
             neigbors.forEach(([x, y]) => {
               const IX = i + x
               const JY = j + y
@@ -73,8 +86,10 @@ const GameBoard = () => {
         }
       })
     })
-
-    setTimeout(startGame, gameTime)
+    handleGenerations()
+    setTimeout(() => {
+      startGame()
+    }, gameTime)
   }, [])
 
   return (
@@ -115,6 +130,8 @@ const GameBoard = () => {
               if (!start) {
                 startReference.current = true
                 startGame()
+                setGenerations(0)
+                resetCount()
               } else {
                 startReference.current = false
               }
@@ -127,6 +144,7 @@ const GameBoard = () => {
             onClick={() => {
               setGameGrid(emptyGrid())
               setGameTime(1000)
+              setGenerations(0)
             }}
             className={styles.btn}
           >
@@ -142,7 +160,8 @@ const GameBoard = () => {
           </button>
           <button
             onClick={() => {
-              setGameTime(100)
+              let time = 100
+              setGameTime(time)
             }}
             className={styles.btn}
           >
@@ -150,7 +169,8 @@ const GameBoard = () => {
           </button>
           <button
             onClick={() => {
-              setGameTime(500)
+              let time = 500
+              setGameTime(time)
             }}
             className={styles.btn}
           >
@@ -158,7 +178,8 @@ const GameBoard = () => {
           </button>
           <button
             onClick={() => {
-              setGameTime(1000)
+              let time = 1000
+              setGameTime(time)
             }}
             className={styles.btn}
           >
@@ -168,6 +189,7 @@ const GameBoard = () => {
             <h3>Game Details</h3>
             <p>Interval: {gameTime}</p>
             <p>Grid Size: {`${gridSize}x${gridSize}`}</p>
+            <p>Generations: {generations}</p>
           </div>
         </section>
       </div>
